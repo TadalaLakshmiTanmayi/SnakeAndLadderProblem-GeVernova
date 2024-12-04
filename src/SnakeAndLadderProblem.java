@@ -7,13 +7,15 @@ public class SnakeAndLadderProblem {
     public static final int SNAKE = 2;
     public static void main(String[] args) {
         System.out.println("This problem simulates a Snake and Ladder Game.");
-        //UC1
-        int playerPosition = 0; // Starting position
+        int playerPosition = 0;
         System.out.println("Game Started: Player at position " + playerPosition);
+        int diceRollCount = 0; // Counter for number of dice rolls
         Random random = new Random();
-        // UC5: Repeat until player reaches position 100
+
+        // UC6: Repeat until player reaches position 100
         while (playerPosition < WINNING_POSITION) {
             int diceRoll = random.nextInt(6) + 1; // Random number between 1 and 6
+            diceRollCount++;
             System.out.println("Rolled the die: " + diceRoll);
 
             int option = random.nextInt(3); // Random value between 0, 1, 2 (No Play, Ladder, Snake)
@@ -47,6 +49,8 @@ public class SnakeAndLadderProblem {
 
             System.out.println("Player's current position: " + playerPosition);
         }
+
         System.out.println("Player has won! Reached position " + WINNING_POSITION);
+        System.out.println("Total dice rolls: " + diceRollCount);
     }
 }
