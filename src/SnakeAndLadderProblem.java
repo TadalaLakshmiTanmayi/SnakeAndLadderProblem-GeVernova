@@ -11,7 +11,7 @@ public class SnakeAndLadderProblem {
         int playerPosition = 0; // Starting position
         System.out.println("Game Started: Player at position " + playerPosition);
         Random random = new Random();
-// UC4: Repeat until player reaches position 100
+        // UC5: Repeat until player reaches position 100
         while (playerPosition < WINNING_POSITION) {
             int diceRoll = random.nextInt(6) + 1; // Random number between 1 and 6
             System.out.println("Rolled the die: " + diceRoll);
@@ -31,6 +31,12 @@ public class SnakeAndLadderProblem {
                     playerPosition -= diceRoll;
                     System.out.println("Snake! Move backward by " + diceRoll + " positions.");
                     break;
+            }
+
+            // Ensure the player gets the exact winning position
+            if (playerPosition > WINNING_POSITION) {
+                System.out.println("Position exceeds 100. Stay at the same position.");
+                playerPosition -= diceRoll; // Revert the movement
             }
 
             // If the player moves below 0, reset to position 0
