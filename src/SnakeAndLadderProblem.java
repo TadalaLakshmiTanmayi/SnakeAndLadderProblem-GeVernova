@@ -7,50 +7,93 @@ public class SnakeAndLadderProblem {
     public static final int SNAKE = 2;
     public static void main(String[] args) {
         System.out.println("This problem simulates a Snake and Ladder Game.");
-        int playerPosition = 0;
-        System.out.println("Game Started: Player at position " + playerPosition);
-        int diceRollCount = 0; // Counter for number of dice rolls
+        int player1Position = 0, player2Position = 0;
+        int player1Rolls = 0, player2Rolls = 0;
         Random random = new Random();
 
-        // UC6: Repeat until player reaches position 100
-        while (playerPosition < WINNING_POSITION) {
-            int diceRoll = random.nextInt(6) + 1; // Random number between 1 and 6
-            diceRollCount++;
-            System.out.println("Rolled the die: " + diceRoll);
+        // UC7: Play with 2 players
+        while (player1Position < WINNING_POSITION && player2Position < WINNING_POSITION) {
+            // Player 1's turn
+            player1Rolls++;
+            int diceRoll1 = random.nextInt(6) + 1;
+            System.out.println("Player 1 rolls: " + diceRoll1);
 
-            int option = random.nextInt(3); // Random value between 0, 1, 2 (No Play, Ladder, Snake)
-            System.out.println("Option: " + option);
+            int option1 = random.nextInt(3);
+            System.out.println("Option for Player 1: " + option1);
 
-            switch (option) {
+            switch (option1) {
                 case NOPLAY:
-                    System.out.println("No Play. Stay at the same position.");
+                    System.out.println("Player 1: No Play. Stay at the same position.");
                     break;
                 case LADDER:
-                    playerPosition += diceRoll;
-                    System.out.println("Ladder! Move forward by " + diceRoll + " positions.");
+                    player1Position += diceRoll1;
+                    System.out.println("Player 1: Ladder! Move forward by " + diceRoll1 + " positions.");
                     break;
                 case SNAKE:
-                    playerPosition -= diceRoll;
-                    System.out.println("Snake! Move backward by " + diceRoll + " positions.");
+                    player1Position -= diceRoll1;
+                    System.out.println("Player 1: Snake! Move backward by " + diceRoll1 + " positions.");
                     break;
             }
 
-            // Ensure the player gets the exact winning position
-            if (playerPosition > WINNING_POSITION) {
-                System.out.println("Position exceeds 100. Stay at the same position.");
-                playerPosition -= diceRoll; // Revert the movement
+            // Ensure Player 1 gets the exact position
+            if (player1Position > WINNING_POSITION) {
+                System.out.println("Player 1's position exceeds 100. Stay at the same position.");
+                player1Position -= diceRoll1;
             }
 
-            // If the player moves below 0, reset to position 0
-            if (playerPosition < 0) {
-                System.out.println("Position below 0. Restart from position 0.");
-                playerPosition = 0;
+            if (player1Position < 0) {
+                System.out.println("Player 1's position is below 0. Restart from position 0.");
+                player1Position = 0;
             }
 
-            System.out.println("Player's current position: " + playerPosition);
+            System.out.println("Player 1's position: " + player1Position);
+
+            // If Player 1 reaches 100, they win
+            if (player1Position == WINNING_POSITION) {
+                System.out.println("Player 1 wins!");
+                break;
+            }
+
+            // Player 2's turn
+            player2Rolls++;
+            int diceRoll2 = random.nextInt(6) + 1;
+            System.out.println("Player 2 rolls: " + diceRoll2);
+
+            int option2 = random.nextInt(3);
+            System.out.println("Option for Player 2: " + option2);
+
+            switch (option2) {
+                case NOPLAY:
+                    System.out.println("Player 2: No Play. Stay at the same position.");
+                    break;
+                case LADDER:
+                    player2Position += diceRoll2;
+                    System.out.println("Player 2: Ladder! Move forward by " + diceRoll2 + " positions.");
+                    break;
+                case SNAKE:
+                    player2Position -= diceRoll2;
+                    System.out.println("Player 2: Snake! Move backward by " + diceRoll2 + " positions.");
+                    break;
+            }
+
+            // Ensure Player 2 gets the exact position
+            if (player2Position > WINNING_POSITION) {
+                System.out.println("Player 2's position exceeds 100. Stay at the same position.");
+                player2Position -= diceRoll2;
+            }
+
+            if (player2Position < 0) {
+                System.out.println("Player 2's position is below 0. Restart from position 0.");
+                player2Position = 0;
+            }
+
+            System.out.println("Player 2's position: " + player2Position);
+
+            // If Player 2 reaches 100, they win
+            if (player2Position == WINNING_POSITION) {
+                System.out.println("Player 2 wins!");
+                break;
+            }
         }
-
-        System.out.println("Player has won! Reached position " + WINNING_POSITION);
-        System.out.println("Total dice rolls: " + diceRollCount);
     }
 }
